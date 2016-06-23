@@ -1,29 +1,21 @@
-package IntroductionLocks;
+package IntroductionSynchronization;
 
 public class Intro {
 
 	public static void main(String[] args) {
-		NoLockATM noLockATM = new NoLockATM();
-		LockedATM lockedATM = new LockedATM();
-		MyClass thread1 = new MyClass(noLockATM, lockedATM);
-		MyClass thread2 = new MyClass(noLockATM, lockedATM);
-		
-		thread1.start();
-		thread2.start();
-		
 		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MyObject obj1 = new MyObject();
+			MyObject obj2 = new MyObject();
+			MyClass thread1 = new MyClass(obj1, "1");
+			MyClass thread2 = new MyClass(obj2, "2");
+			
+			thread1.start();
+			thread2.start();
+			
+			Thread.sleep(3000 * 3);
+		}  catch (InterruptedException exc) {
+			System.out.println("Program Interrupted.");
 		}
-		thread1.waitUntilDone();
-		thread2.waitUntilDone();
-		
-		System.out.println("NoLock ATM: " + noLockATM.getBalance());
-		System.out.println("Locked ATM: " + lockedATM.getBalance());
-		int v = thread1.delta + thread2.delta + 100;
-		System.out.println("Should Be: " + v);
 		System.out.println("Program terminating.");
 	}
 
