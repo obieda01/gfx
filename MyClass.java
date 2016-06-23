@@ -1,4 +1,4 @@
-package IntroductionSynchronizedBlocks;
+package IntroductionWaitNotify;
 
 public class MyClass extends Thread  {
 	private String name;
@@ -10,6 +10,12 @@ public class MyClass extends Thread  {
 	}
 	
 	public void run() {
-		myObj.foo(name);
+		try {
+			myObj.wait(1000);
+			myObj.foo(name);
+			myObj.notify();			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
