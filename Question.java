@@ -1,32 +1,22 @@
-package Q15_03_Dining_Philosophers.QuestionB;
+package Q15_04_Deadlock_Free_Class;
 
 public class Question {
-	public static int size = 3;
-	
-	public static int leftOf(int i) {
-		return i;
-	}
-	
-	public static int rightOf(int i) {
-		return (i + 1) % size;
-	}
-	
-	public static void main(String[] args) {		
-		Chopstick[] chopsticks = new Chopstick[size + 1];
-		for (int i = 0; i < size + 1; i++) {
-			chopsticks[i] = new Chopstick(i);
-		}
+
+	public static void main(String[] args) {
+		int[] res1 = {1, 2, 3, 4};
+		int[] res2 = {1, 5, 4, 1};
+		int[] res3 = {1, 4, 5};
 		
-		Philosopher[] philosophers = new Philosopher[size];
-		for (int i = 0; i < size; i++) {
-			Chopstick left = chopsticks[leftOf(i)];
-			Chopstick right = chopsticks[rightOf(i)];
-			philosophers[i] = new Philosopher(i, left, right);
-		}
+		LockFactory.initialize(10);
 		
-		for (int i = 0; i < size; i++) {
-			philosophers[i].start();
-		}		
+		LockFactory lf = LockFactory.getInstance();
+		System.out.println(lf.declare(1, res1));
+		System.out.println(lf.declare(2, res2));
+		System.out.println(lf.declare(3, res3));	
+		
+		System.out.println(lf.getLock(1, 1));
+		System.out.println(lf.getLock(1, 2));
+		System.out.println(lf.getLock(2, 4));
 	}
 
 }
