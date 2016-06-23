@@ -1,4 +1,4 @@
-package IntroductionSynchronization;
+package IntroductionSynchronizedBlocks;
 
 public class MyClass extends Thread  {
 	private String name;
@@ -10,10 +10,6 @@ public class MyClass extends Thread  {
 	}
 	
 	public void run() {
-		if (name.equals("1")) {
-			MyObject.foo(name);
-		} else if (name.equals("2")) {
-			MyObject.bar(name);
-		}
+		myObj.foo(name);
 	}
 }
